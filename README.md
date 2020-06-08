@@ -1,6 +1,8 @@
 # systech-test-task
 Тестовое задание для SysTech. Сделано с помощью шаблонизатора Handlebars, оптимизировано под ES5 через Babel.
 
+Ссылка для проверки: http://landing-2.tw1.ru/
+
 Запрос в таблицу:
 
 SELECT docs.date, docTypes.name as type, rows.docId, products.image, products.name, products.price, rows.quantity, products.removed
