@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+    <title>SysTech test task</title>
+    <!--скрипт Шаблонизатора Handlebars -->
+    <script src="js/handlebars-v4.7.6.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/media.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- В этот класс вставляется сгенерированный контент-->
+      <div class="inventory"></div>
+    </div>
+    <!--шаблонизатор Handlebars начало -->
+    <script id="main" type="text/x-handlebars-template">
+      {{#each this}}
+        <div class="inventory__day-block">
+          <div class="inventory__day-info">
+            <div class="inventory__date">
+              <i class="las la-angle-right"></i>
+              {{convertDate @key}}
+            </div>
+            <div class="inventory__docs">
+              <span>
+                Документов: {{countIds this}}
+              </span>
+              ({{countSum this}}<i class="las la-ruble-sign"></i><!-- prettier-ignore -->)
+            </div>
+          </div>
+
+          {{#each this}}
+            <div class="inventory__id-block">
+              <div class="inventory__id-info">
+                <div class="inventory__id-num">
+                  <span>
+                    Приход
+                  </span>
+                  №{{@key}}
+                </div>
+                <div class="inventory__id-sum">
+                  {{countIdProd this}}<i class="las la-ruble-sign"></i>
+                </div>
+                <div class="inventory__id-count">
+                  <i class="las la-caret-right"></i>
+                  Товаров: {{countIds this}}
+                </div>
+              </div>
+              <div class="inventory__wrapper">
+                {{#each this}}
+                  <div class="inventory__item-block">
+                    <div class="inventory__item-image">
+                      {{#if this.image}}
+                        <img src="{{this.image}}" />
+                      {{else}}
+                        <img class="img_bordered" src="img/unnamed.jpg" />
+                      {{/if}}
+                    </div>
+                    <div class="inventory__item-info">
+                      <div class="inventory__item-name">
+                        {{this.name}}
+                      </div>
+                      <div class="invetory__item-quantprice">
+                        <span class="invetory__item-quantity">
+                          {{this.quantity}} {{wordEndings this.quantity}}
+                        </span>
+                        <span class="multiply">
+                          <i class="las la-times"></i>
+                        </span>
+                        <span class="inventory__item-price">
+                          {{this.price}}<i class="las la-ruble-sign"></i>
+                        </span>
+                      </div>
+                      <div class="inventory__item-total">
+                        {{countIdSum this}}<i class="las la-ruble-sign"></i>
+                      </div>
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{/each}}
+    </script>
+    <!-- Скрипт логики -->
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="js/spoiler.js"></script>
+  </body>
+</html>
